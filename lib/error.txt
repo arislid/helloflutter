@@ -1,0 +1,26 @@
+/// Expanded와 SingleChildScrollView 같이 사용할 때 OverFlow 발생할 수 있으니 아래 에러를 보고 확인해볼 것.
+
+            /**Exception has occurred.
+            FlutterError (RenderFlex children have non-zero flex but incoming height constraints are unbounded.
+            When a column is in a parent that does not provide a finite height constraint, for example if it is in a vertical scrollable, it will try to shrink-wrap its children along the vertical axis. Setting a flex on a child (e.g. using Expanded) indicates that the child is to expand to fill the remaining space in the vertical direction.
+            These two directives are mutually exclusive. If a parent is to shrink-wrap its child, the child cannot simultaneously expand to fit its parent.
+            Consider setting mainAxisSize to MainAxisSize.min and using FlexFit.loose fits for the flexible children (using Flexible rather than Expanded). This will allow the flexible children to size themselves to less than the infinite remaining space they would otherwise be forced to take, and then will cause the RenderFlex to shrink-wrap the children rather than expanding to fit the maximum constraints provided by the parent.
+            If this message did not help you determine the problem, consider using debugDumpRenderTree():
+              https://flutter.dev/debugging/#rendering-layer
+              http://api.flutter.dev/flutter/rendering/debugDumpRenderTree.html
+            The affected RenderFlex is:
+              RenderFlex#43f45 relayoutBoundary=up17 NEEDS-LAYOUT NEEDS-PAINT NEEDS-COMPOSITING-BITS-UPDATE(needs compositing, creator: Column ← Row ← Padding ← DecoratedBox ← Container ← DateCard ← Column ← DateCardSpacing ← Column ← _SingleChildViewport ← IgnorePointer-[GlobalKey#03485] ← Semantics ← ⋯, parentData: offset=Offset(44.2, 6.0); flex=null; fit=null (can use size), constraints: BoxConstraints(unconstrained), size: Size(192.8, 112.0), direction: vertical, mainAxisAlignment: start, mainAxisSize: max, crossAxisAlignment: start, textDirection: ltr, verticalDirection: down)
+            The creator information is set to:
+              Column ← Row ← Padding ← DecoratedBox ← Container ← DateCard ← Column ← DateCardSpacing ← Column ← _SingleChildViewport ← IgnorePointer-[GlobalKey#03485] ← Semantics ← ⋯
+            The nearest ancestor providing an unbounded width constraint is: _RenderSingleChildViewport#1c02d relayoutBoundary=up11 NEEDS-LAYOUT NEEDS-PAINT NEEDS-COMPOSITING-BITS-UPDATE:
+              needs compositing
+              creator: _SingleChildViewport ← IgnorePointer-[GlobalKey#03485] ← Semantics ← Listener ← _GestureSemantics ← RawGestureDetector-[LabeledGlobalKey<RawGestureDetectorState>#cd2ff] ← Listener ← _ScrollableScope ← _ScrollSemantics-[GlobalKey#636ef] ← NotificationListener<ScrollMetricsNotification> ← Transform ← ClipRect ← ⋯
+              parentData: <none> (can use size)
+              constraints: BoxConstraints(0.0<=w<=354.0, h=535.0)
+              layer: OffsetLayer#9f588
+              size: Size(354.0, 535.0)
+              offset: Offset(0.0, -145.0)
+            See also: https://flutter.dev/unbounded-constraints
+            If none of the above helps enough to fix this problem, please don't hesitate to file a bug:
+              https://github.com/flutter/flutter/issues/new?template=2_bug.yml) 
+              */
